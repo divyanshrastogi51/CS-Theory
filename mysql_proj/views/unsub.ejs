@@ -1,0 +1,42 @@
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400" rel="stylesheet">
+  <link rel="stylesheet" href="/app.css">
+</head>
+
+<body>
+  <div class="flex-container">
+  <!-- <div class="container">
+      <h1>JOIN US</h1>
+      <p class="lead"> Your email to join <strong><%= JSON.stringify(data) %></strong> others on our waitlist. We are 100% not a cult. </p>
+      
+        <form action='/'>
+      <button type="submit"> back</button></form>
+    
+  </div> -->
+  <table class="table table-inverse">
+    <thead>
+      <tr>
+        <th>User ID</th>
+        <th>Email</th>
+        <th>Created at</th>
+      </tr>
+    </thead>
+  
+    <tbody>
+      <% for(var i=0; i < data.length; i++) { %>
+      <tr>
+        <td><%= data[i].id %></td>
+        <td><%= data[i].email %></td>
+        <td><%= data[i].created_at %></td>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
+  <form method="POST" action='/unsubsucc'>
+    <input type="int" class="form" name="id" placeholder="Enter Your ID">
+    <button>Unsubscribe NOW</button>
+  </form>
+  
+  
+</div>
+</body>
