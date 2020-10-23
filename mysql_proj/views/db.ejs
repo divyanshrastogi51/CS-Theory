@@ -5,14 +5,6 @@
 
 <body>
   <div class="flex-container">
-  <!-- <div class="container">
-      <h1>JOIN US</h1>
-      <p class="lead"> Your email to join <strong><%= JSON.stringify(data) %></strong> others on our waitlist. We are 100% not a cult. </p>
-      
-        <form action='/'>
-      <button type="submit"> back</button></form>
-    
-  </div> -->
   <form action='/sort'>
     
     <button>Sort by date</button>
@@ -27,18 +19,38 @@
     </thead>
   
     <tbody>
-      <% for(var i=0; i < data.length; i++) { %>
+      <% for(var i=0; i < data1.length; i++) { %>
       <tr>
-        <td><%= data[i].id %></td>
-        <td><%= data[i].email %></td>
-        <td><%= data[i].created_at %></td>
+        <td><%= data1[i].u_id %></td>
+        <td><%= data1[i].email %></td>
+        <td><%= data1[i].created_at %></td>
       </tr>
       <% } %>
     </tbody>
   </table>
+  <div style="padding: 25px;"><p style="height: auto;color:black;">Newsletters<p></div>
+  <table class="table table-inverse">
+    <thead>
+      <tr>
+        <th> ID</th>
+        <th>Name</th>
+        <th>Total Subscribers</th>
+      </tr>
+    </thead>
+  
+  <tbody>
+    <% for(var i=0; i < data2.length; i++) { %>
+    <tr>
+      <td><%= data2[i].n_id %></td>
+      <td><%= data2[i].name %></td>
+      <td><%= data2[i].c %></td>
+    </tr>
+    <% } %>
+  </tbody>
+</table>
   <form action='/'>
     <button type="submit"> back</button></form>
-    <form action='/unsub'>
-      <button type="submit"> Unsubscribe Us</button></form>
+      <form action='/news'>
+        <button type="submit"> Newsletters</button></form>
 </div>
 </body>

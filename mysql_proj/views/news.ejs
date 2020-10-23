@@ -1,0 +1,38 @@
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400" rel="stylesheet">
+  <link rel="stylesheet" href="/app.css">
+</head>
+
+<body>
+  <div class="flex-container">
+  <table class="table table-inverse">
+    <thead>
+      <tr>
+        <th>Newsletter ID</th>
+        <th>Name</th>
+        <th>Subscriber Email ID</th>
+      </tr>
+    </thead>
+  
+    <tbody>
+      <% for(var i=0; i < data1.length; i++) { %>
+      <tr>
+        <td><%= data1[i].n_id %></td>
+        <td><%= data1[i].name %></td>
+        <td><%= data1[i].email %></td>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
+  <form action='/db'>
+    <button type="submit"> back</button>
+  </form>
+      <form method="POST" action='/subscribe'>
+        <input type="int" class="form" name="id1" placeholder="Enter User ID">
+        <input type="int" class="form" name="id2" placeholder="Enter Newsletter ID">
+
+        <button>Subscribe NOW</button>
+      </form>
+  
+</div>
+</body>

@@ -8,7 +8,7 @@ body {
   font-family: 'Roboto', sans-serif;
   color: rgb(66, 69, 86);
   max-height: 100vh;
-  background-image: url('http://i.imgur.com/BJP2Q1j.jpg');
+  background-color: aliceblue;
   background-size: cover;
   font-weight: 100;
   line-height: 1.5;
@@ -35,29 +35,32 @@ p {
 
 .form {
   border: none;
-  border-bottom: 3px solid #ebebeb;
+  border-bottom: 3px solid #da0a0a;
   margin-top: 10rem;
   width: 60%;
   max-width: 70rem;
   font-size: 2rem;
-  color: white;
+  color: black;
   padding: 0.5rem 1rem;
   background: transparent;
+  text-shadow: #000;
+  text-decoration-color: #000;
+  text-emphasis-color: black;
 }
 
 button {
   border: 3px solid white;
   font-size: 2rem;
-  color: rgb(66, 69, 86);
+  color: black;
   padding: 0.5rem 3rem;
-  background: rgba(255, 255, 255, 1);
+  background: yellow;
   border-radius: 5px;
   opacity: 0.8;
 }
 
 ::-webkit-input-placeholder {
   /* Chrome/Opera/Safari */
-  color: rgba(255, 255, 255, 0.8);
+  color: lightblue
 }
 input[type='email']:focus {
   outline: none;
@@ -66,4 +69,27 @@ input[type='email']:focus {
 button:hover {
   opacity: 1;
   cursor: pointer;
+}
+
+input{
+  background-color:black;
+  text-shadow: black;
+  color: #000;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  height: 50px;
+}
+
+input[type=text]{
+  
 }

@@ -13,8 +13,8 @@ var connection = mysql.createConnection({
   user     : 'root',
   password: 'letdothat006',  
   database : 'join_us' ,
-  port: 3306
-          
+  port: 3306,
+  multipleStatements: true     
 });
 
 
@@ -24,27 +24,56 @@ var connection = mysql.createConnection({
   connection.query(q, function(err, results){
       if(err) throw err;
       var count = results[0].count; 
-      res.render("home", {data: count});
+      res.render("login", {data: count});
   });
 });
 
-app.post('/register', function(req,res){
-  var person = {email: req.body.email};
-  connection.query('INSERT INTO users SET ?', person, function(err, result) {
-  console.log(err);
-  console.log(result);
-  res.redirect("/");
-  });
- });
+app.post('/auth', function(request, response) {
+	var email = request.body.email;
+	var password = request.body.password;
+	if (email && password) {
+		connection.query('SELECT * FROM users WHERE email = ? AND password = ?', [email, password], function(error, results, fields) {
+			if (results.length > 0) {
+				response.redirect('/db');
+			} else {
+				response.send('Incorrect Email and/or Password!');
+			}			
+			response.end();
+		});
+	} else {
+		response.send('Please enter email and Password!');
+		response.end();
+	}
+});
+
+
 
 
  app.get("/db", function(req, res){
   // Find count of users in DB
-  var q = "SELECT * FROM users";
+
+  connection.query('SELECT * FROM users ; Select *,count(n_id) as c from newsletters  join (Select * from users join subscriber on users.u_id = subscriber.user_id )as us on newsletters.n_id=us.news_id group by n_id ', [1, 2], function(err, results){
+    if(err) throw err; 
+    res.render("db", {data1: results[0] , data2: results[1]});
+      
+  });
+});
+
+app.get("/regpage", function(req, res){
+  var q = "SELECT COUNT(*) AS count FROM users";
   connection.query(q, function(err, results){
-    if(err) throw err;
-    var count = results; 
-    res.render("db", {data: count});
+      if(err) throw err;
+      var count = results[0].count; 
+      res.render("register", {data: count});
+  });
+});
+
+app.get("/user", function(req, res){
+  // Find count of users in DB
+
+  connection.query('SELECT * FROM users ; Select *,count(n_id) as c from newsletters  join (Select * from users join subscriber on users.u_id = subscriber.user_id )as us on newsletters.n_id=us.news_id group by n_id ', [1, 2], function(err, results){
+    if(err) throw err; 
+    res.render("db", {data1: results[0] , data2: results[1]});
       
   });
 });
@@ -70,25 +99,41 @@ app.post('/unsubsucc', function(req,res){
   });
  });
 
-//  app.post('/sort', function(req,res){
-//   var person = {id: req.body.id};
-//   connection.query('delete from users where id =?', person.id, function(err, result) {
-//   console.log(err);
-//   console.log(result);
-//   res.redirect("/");
-//   });
-//  });
 
 app.get("/sort", function(req, res){
-  // Find count of users in DB
-  var q = "SELECT * FROM users ORDER BY created_at";
-  connection.query(q, function(err, results){
+  connection.query("SELECT * FROM users ORDER BY created_at desc ; SELECT * FROM newsletters ORDER BY name", [1,2], function(err, results){
     if(err) throw err;
-    var count = results; 
-    res.render("db", {data: count});
+    res.render("db", {data1: results[0] ,data2: results[1]});
       
   });
 });
+
+
+app.get("/news", function(req, res){
+  
+
+  connection.query("Select * from newsletters  join (Select * from users join subscriber on users.u_id = subscriber.user_id )as us on newsletters.n_id=us.news_id ; select * from newsletters", [1,2], function(err, results){
+    if(err) throw err; 
+    res.render("news", {data1: results[0],data2: results[1]});
+      
+  });
+});
+
+app.post('/subscribe', function(req,res){
+  connection.query("INSERT INTO subscriber (user_id,news_id) VALUES ("+req.body.id1+","+req.body.id2+")", function(err, result) {
+  console.log(err);
+  console.log(result);
+  res.redirect("/db");
+  });
+ });
+
+ app.post('/regi', function(req,res){
+  connection.query("INSERT INTO users (email,password) values('"+req.body.email+"','"+req.body.password+"')", function(err, result) {
+  console.log(err);
+  console.log(result);
+  res.redirect("/");
+  });
+ });
 
 app.listen(8080, function () {
  console.log('App listening on port 8080!');
