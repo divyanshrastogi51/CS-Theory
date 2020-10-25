@@ -1,0 +1,53 @@
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400" rel="stylesheet">
+  <link rel="stylesheet" href="/app.css">
+</head>
+
+<body>
+  <div class="flex-container">
+ 
+  <p>Welcome <%= data3 %></p>
+  <p>Your user id is <%= data1[0].u_id %></p>
+  
+  <div style="padding: 25px;"><p style="height: auto;color:black;">Newsletters<p></div>
+    <table class="table table-inverse">
+      <thead>
+        <tr>
+          <th>Your Subsribed Newsletter Name</th>
+        </tr>
+      </thead>
+    
+    <tbody>
+      <% for(var i=0; i < data4.length; i++) { %>
+      <tr>
+        <td><%= data4[i].name %></td>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
+
+  <div style="padding: 25px;"><p style="height: auto;color:black;">Availble Newsletters<p></div>
+  <table class="table table-inverse">
+    <thead>
+      <tr>
+        <th> ID</th>
+        <th>Name</th>
+      </tr>
+    </thead>
+  
+  <tbody>
+    <% for(var i=0; i < data2.length; i++) { %>
+    <tr>
+      <td><%= data2[i].n_id %></td>
+      <td><%= data2[i].name %></td>
+    </tr>
+    <% } %>
+  </tbody>
+</table>
+
+      <form action='/news'>
+        <button type="submit">Subscriber another Newsletters</button></form>
+        <form action='/unsub'>
+          <button type="submit">Unsubscribe Newsletters</button></form>
+</div>
+</body>

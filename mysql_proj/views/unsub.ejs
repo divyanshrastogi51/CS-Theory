@@ -5,36 +5,32 @@
 
 <body>
   <div class="flex-container">
-  <!-- <div class="container">
-      <h1>JOIN US</h1>
-      <p class="lead"> Your email to join <strong><%= JSON.stringify(data) %></strong> others on our waitlist. We are 100% not a cult. </p>
-      
-        <form action='/'>
-      <button type="submit"> back</button></form>
-    
-  </div> -->
   <table class="table table-inverse">
     <thead>
       <tr>
-        <th>User ID</th>
-        <th>Email</th>
-        <th>Created at</th>
+        <th>Newsletter ID</th>
+        <th>Name</th>
+        <th>Subscriber Email ID</th>
       </tr>
     </thead>
   
     <tbody>
-      <% for(var i=0; i < data.length; i++) { %>
+      <% for(var i=0; i < data1.length; i++) { %>
       <tr>
-        <td><%= data[i].u_id %></td>
-        <td><%= data[i].email %></td>
-        <td><%= data[i].created_at %></td>
+        <td><%= data1[i].n_id %></td>
+        <td><%= data1[i].name %></td>
+        <td><%= data1[i].email %></td>
       </tr>
       <% } %>
     </tbody>
   </table>
+  
   <form method="POST" action='/unsubsucc'>
-    <input type="int" class="form" name="id" placeholder="Enter Your ID">
-    <button>Unsubscribe NOW</button>
+    <input type="int" class="form" name="id1" placeholder="Enter User ID">
+    <input type="int" class="form" name="id2" placeholder="Enter Newsletter ID">
+
+    <button type="submit">Unsubscribe NOW</button>
+    
   </form>
   
   
